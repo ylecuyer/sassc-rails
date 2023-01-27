@@ -11,7 +11,7 @@ class Sprockets::SassCompressor
       read_cache: false,
       style: :compressed
     }.merge(options).freeze
-    @cache_key = SecureRandom.uuid
+    @cache_key = "#{self.class.name}:#{SassC::Rails::VERSION}:#{VERSION}:#{Sprockets::DigestUtils.digest(options)}".freeze
   end
 
   def call(*args)
